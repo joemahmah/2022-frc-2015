@@ -1,6 +1,7 @@
 2022-frc-2015
 =============
 
-The official Titan Robotics (FRC #2022) repository for the 2015 competition year.
+This is an official repo for Titan Robotics (FRC #2022). This repo is for the 2015 competition year bot.
 
-Testing the Slack GuiHub integration...
+=============
+
