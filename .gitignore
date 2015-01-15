@@ -4,9 +4,9 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
-*.war
-*.ear
+/2015_Bot/bin/*.jar
+/2015_Bot/bin/*.war
+/2015_Bot/bin/*.ear
 
 # Folders
 /.metadata
