@@ -40,9 +40,11 @@ public class TankDriveCommand extends Command {
 	}
 	@Override
 	protected void end() {
+		throw new IllegalStateException("NOT FINISHED!");
 	}
 	@Override
 	protected void interrupted() {
+		//this command is rather important and should not be canceled
 	}
 	@Override
 	//no it doesn't :)

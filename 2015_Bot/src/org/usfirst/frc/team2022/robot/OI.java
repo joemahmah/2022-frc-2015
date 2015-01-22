@@ -2,6 +2,7 @@ package org.usfirst.frc.team2022.robot;
 
 //import edu.wpi.first.wpilibj.buttons.Button;
 
+import org.usfirst.frc.team2022.robot.controllers.Attack3;
 import org.usfirst.frc.team2022.robot.controllers.Xbox;
 
 /**
@@ -10,12 +11,13 @@ import org.usfirst.frc.team2022.robot.controllers.Xbox;
  */
 public class OI {
 	public final Xbox xbox;
-	
+	public final Attack3 attack3;
 	public OI(){
-		xbox = new Xbox(3);
+		xbox = new Xbox(2);
+		attack3 = new Attack3(3);
 	}
-	
-	
+//------------------------------CUT HERE----------------------------------------
+	//EVERYTHING BELOW HERE IS DEPRECEATED AND NO USE
 	
 	
     //// CREATING BUTTONS
