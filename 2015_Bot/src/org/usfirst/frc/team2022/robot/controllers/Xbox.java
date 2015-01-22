@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
- *
+ * Xbox Controller wrapper.
  * @author TitanRobotics
  */
 public class Xbox extends Joystick {
