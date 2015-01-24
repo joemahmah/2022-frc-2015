@@ -22,6 +22,9 @@ public class TankDriveCommand extends Command {
 		double speedModifier = .75;
 		double right = Math.max(Math.min(oi.xbox.GetRightY(), 1),-1);
 		double left = Math.max(Math.min(oi.xbox.GetRightY(), 1),-1);
+		if(oi.xbox.GetBValue()){
+			Robot.tankSubsystem.toggleInversion();
+		}
 		if(oi.xbox.GetLeftBumperValue()){
 			if(oi.xbox.GetStartButton().get()){
 				speedModifier = .25;//fast turtle
