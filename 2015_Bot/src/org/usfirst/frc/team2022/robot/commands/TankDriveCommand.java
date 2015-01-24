@@ -40,13 +40,10 @@ public class TankDriveCommand extends Command {
 	}
 	@Override
 	protected void end() {
-		throw new IllegalStateException("NOT FINISHED!");
+		Robot.tankSubsystem.stop();
 	}
 	@Override
 	protected void interrupted() {
-		//this command is rather important and should not be canceled
+		end();
 	}
-	@Override
-	//no it doesn't :)
-	public void cancel(){}
 }
