@@ -33,7 +33,18 @@ public class Forklift extends Subsystem {
 		}
 		isUpperLimit = upperLimit.get();
 		isLowerLimit = upperLimit.get();
-		
+	}
+	public static void toTop(){
+		while(upperLimit.get() == false){
+			winchMotor.set(1);
+		}
+		winchMotor.set(0);
+	}
+	public static void toBottom(){
+		while(lowerLimit.get() == false){
+			winchMotor.set(-1);
+		}
+		winchMotor.set(0);
 	}
 
 

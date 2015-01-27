@@ -11,9 +11,9 @@ import org.usfirst.frc.team2022.robot.Robot;
 /**
  *
  */
-public class ForkliftToBottom extends Command {
+public class ForkliftCommand extends Command {
 
-    public ForkliftToBottom() {
+    public ForkliftCommand() {
         // Use requires() here to declare subsystem dependencies
         requires();
     }
@@ -24,12 +24,12 @@ public class ForkliftToBottom extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    		Forklift.moveForklift(-1);
+    //call Forklift.toTop() and Forklift.toBottom() depending on controller input
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !(Forklift.isLowerLimit);
+        return !(Forklift.isUpperLimit);
     }
 
     // Called once after isFinished returns true
