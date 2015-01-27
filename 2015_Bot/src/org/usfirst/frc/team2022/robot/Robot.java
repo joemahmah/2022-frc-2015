@@ -5,8 +5,10 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
 import org.usfirst.frc.team2022.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2022.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team2022.robot.subsystems.TankDriveSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -18,6 +20,7 @@ import org.usfirst.frc.team2022.robot.subsystems.ExampleSubsystem;
 public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
+	public static final TankDriveSubsystem tankSubsystem = new TankDriveSubsystem();
 	public static OI oi;
 
     Command autonomousCommand;

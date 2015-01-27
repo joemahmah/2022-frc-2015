@@ -1,13 +1,25 @@
 package org.usfirst.frc.team2022.robot;
 
-import edu.wpi.first.wpilibj.buttons.Button;
-import org.usfirst.frc.team2022.robot.commands.ExampleCommand;
+//import edu.wpi.first.wpilibj.buttons.Button;
+
+import org.usfirst.frc.team2022.robot.controllers.Attack3;
+import org.usfirst.frc.team2022.robot.controllers.Xbox;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+	public final Xbox xbox;
+	public final Attack3 attack3;
+	public OI(){
+		xbox = new Xbox(2);
+		attack3 = new Attack3(3);
+	}
+//------------------------------CUT HERE----------------------------------------
+	//EVERYTHING BELOW HERE IS DEPRECEATED AND NO USE
+	
+	
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
     // You create one by telling it which joystick it's on and which button
