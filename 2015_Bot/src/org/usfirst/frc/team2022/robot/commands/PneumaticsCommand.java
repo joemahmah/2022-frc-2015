@@ -2,34 +2,46 @@
 package org.usfirst.frc.team2022.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team2022.robot.subsystems.Forklift;
+
 import org.usfirst.frc.team2022.robot.Robot;
-
-
-
+import org.usfirst.frc.team2022.robot.subsystems.Pneumatics;
 
 /**
  *
  */
-public class ForkliftCommand extends Command {
+public class PneumaticsCommand extends Command {
+	
+	boolean isExtended = false;
+	boolean isDone;
 
-    public ForkliftCommand() {
+    public PneumaticsCommand() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.forklift);
+        requires(Robot.pneumatics);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	isDone = false;
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    //call Forklift.toTop() and Forklift.toBottom() depending on controller input
+    	//each case
+		if(isExtended == false){
+    		Robot.pneumatics.valveOpen();
+    		isExtended = true;
+    	}
+    	else;if(isExtended == true){
+    		Robot.pneumatics.valveClose();
+    		isExtended = false;
+    	}
+    	isDone = true;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return !(Forklift.isUpperLimit);
+        return isDone;
     }
 
     // Called once after isFinished returns true
