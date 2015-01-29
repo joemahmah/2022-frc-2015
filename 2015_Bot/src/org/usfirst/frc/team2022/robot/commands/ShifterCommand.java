@@ -9,14 +9,14 @@ import org.usfirst.frc.team2022.robot.subsystems.Pneumatics;
 /**
  *
  */
-public class PneumaticsCommand extends Command {
+public class ShifterCommand extends Command {
 	
 	boolean isExtended = false;
 	boolean isDone;
 
-    public PneumaticsCommand() {
+    public ShifterCommand() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.pneumatics);
+        requires(Robot.shifter);
     }
 
     // Called just before this Command runs the first time
@@ -29,11 +29,11 @@ public class PneumaticsCommand extends Command {
     protected void execute() {
     	//each case
 		if(isExtended == false){
-    		Robot.pneumatics.valveOpen();
+    		Robot.shifter.valveOpen();
     		isExtended = true;
     	}
     	else;if(isExtended == true){
-    		Robot.pneumatics.valveClose();
+    		Robot.shifter.valveClose();
     		isExtended = false;
     	}
     	isDone = true;

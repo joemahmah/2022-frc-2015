@@ -24,7 +24,8 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final TankDriveSubsystem tankSubsystem = new TankDriveSubsystem();
 	public static final Forklift forklift = new Forklift();
-	public static final Pneumatics pneumatics = new Pneumatics(0, 0, 0);
+	public static final Pneumatics shifter = new Pneumatics(0, 0, 0);
+	public static final Pneumatics claw = new Pneumatics(0, 0, 0);
 	public static OI oi;
 
     Command autonomousCommand;
