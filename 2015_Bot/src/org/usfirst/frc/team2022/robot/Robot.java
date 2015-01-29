@@ -1,10 +1,12 @@
 
 package org.usfirst.frc.team2022.robot;
 
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.vision.AxisCamera;
 
 import org.usfirst.frc.team2022.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2022.robot.subsystems.ExampleSubsystem;
@@ -27,6 +29,8 @@ public class Robot extends IterativeRobot {
 	public static final Forklift forklift = new Forklift();
 	public static final Pneumatics shifter = new Pneumatics(RobotMap.shiftPressureSwitchChannel, RobotMap.shiftValveChannel1, RobotMap.shiftValveChannel2);
 	public static final Pneumatics claw = new Pneumatics(RobotMap.clawPressureSwitchChannel, RobotMap.clawValveChannel1, RobotMap.clawValveChannel2);
+	public static final Gyro gyro = new Gyro(RobotMap.gyroChannel);
+	public static final AxisCamera camera = new AxisCamera(RobotMap.cameraHost);
 	public static OI oi;
 
     Command autonomousCommand;
