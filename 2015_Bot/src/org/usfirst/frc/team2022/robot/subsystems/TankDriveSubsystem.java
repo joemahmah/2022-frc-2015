@@ -73,6 +73,32 @@ public class TankDriveSubsystem extends Subsystem {
     	rearRight.set(-motorSpeed);
     	rightSpeed=-motorSpeed;
     }
+    
+    public void forwardAll(int motorSpeed){
+    	frontLeft.set(motorSpeed);
+    	rearLeft.set(motorSpeed);
+    	frontRight.set(motorSpeed);
+    	rearRight.set(motorSpeed);
+    	rightSpeed=motorSpeed;
+    	leftSpeed=motorSpeed;
+    }
+    
+    
+    public void forwardAllRight(int motorSpeed){
+    	frontRight.set(motorSpeed);
+    	rearRight.set(motorSpeed);
+    	rightSpeed=motorSpeed;
+  
+    	
+    }
+
+    public void forwardAllLeft(int motorSpeed){
+    	frontLeft.set(motorSpeed);
+    	rearLeft.set(motorSpeed);
+    	leftSpeed=motorSpeed;
+  
+    	
+    }
     public void stop(){
     	frontRight.stopMotor();
     	frontLeft.stopMotor();
