@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team2022.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2022.robot.commands.TankDriveCommand;
+import org.usfirst.frc.team2022.robot.subsystems.CameraSubsystem;
 import org.usfirst.frc.team2022.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2022.robot.subsystems.TankDriveSubsystem;
 
@@ -21,9 +23,11 @@ public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final TankDriveSubsystem tankSubsystem = new TankDriveSubsystem();
+	public static final CameraSubsystem cameraSubsystem = new CameraSubsystem();
 	public static OI oi;
 
     Command autonomousCommand;
+    TankDriveCommand tankCommand;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -33,6 +37,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
         // instantiate the command used for the autonomous period
         autonomousCommand = new ExampleCommand();
+        tankCommand = new TankDriveCommand();
     }
 	
 	public void disabledPeriodic() {
@@ -57,6 +62,7 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
+        tankCommand.start();
     }
 
     /**
@@ -64,7 +70,7 @@ public class Robot extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit(){
-
+    	//
     }
 
     /**
