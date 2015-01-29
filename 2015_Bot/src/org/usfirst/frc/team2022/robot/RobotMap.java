@@ -15,4 +15,17 @@ public class RobotMap {
     // number and the module. For example you with a rangefinder:
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
+	public static int upperLimitSwitchPort = 1; //fake value
+	public static int lowerLimitSwitchPort = 1; //fake value
+	public static int winch = 1; //fake value
+	// For example to map the left and right motors, you could define the
+	// following variables to use with your drivetrain subsystem.
+	public static int leftMotorFront = 1;
+	public static int leftMotorBack = 2;
+	public static int rightMotorFront = 3;
+	public static int rightMotorBack = 4;
+	// If you are using multiple modules, make sure to define both the port
+	// number and the module. For example you with a rangefinder:
+	// public static int rangefinderPort = 1;
+	// public static int rangefinderModule = 1;
 }
