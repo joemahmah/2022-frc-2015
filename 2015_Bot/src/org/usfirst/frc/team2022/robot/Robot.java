@@ -10,7 +10,8 @@ import org.usfirst.frc.team2022.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2022.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2022.robot.subsystems.Forklift;
 import org.usfirst.frc.team2022.robot.subsystems.TankDriveSubsystem;
-import org.usfirst.frc.team2022.robot.subsystems.Pneumatics;;
+import org.usfirst.frc.team2022.robot.subsystems.Pneumatics;
+import org.usfirst.frc.team2022.robot.RobotMap;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,8 +25,8 @@ public class Robot extends IterativeRobot {
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static final TankDriveSubsystem tankSubsystem = new TankDriveSubsystem();
 	public static final Forklift forklift = new Forklift();
-	public static final Pneumatics shifter = new Pneumatics(0, 0, 0);
-	public static final Pneumatics claw = new Pneumatics(0, 0, 0);
+	public static final Pneumatics shifter = new Pneumatics(RobotMap.shiftPressureSwitchChannel, RobotMap.shiftValveChannel1, RobotMap.shiftValveChannel2);
+	public static final Pneumatics claw = new Pneumatics(RobotMap.clawPressureSwitchChannel, RobotMap.clawValveChannel1, RobotMap.clawValveChannel2);
 	public static OI oi;
 
     Command autonomousCommand;
