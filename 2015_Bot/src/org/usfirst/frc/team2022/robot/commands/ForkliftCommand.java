@@ -3,16 +3,25 @@ package org.usfirst.frc.team2022.robot.commands;
  
 import org.usfirst.frc.team2022.robot.Robot;
 import org.usfirst.frc.team2022.robot.RobotMap;
+import org.usfirst.frc.team2022.robot.controllers.Attack3;
 import org.usfirst.frc.team2022.robot.subsystems.Forklift;
+import org.usfirst.frc.team2022.robot.commands.*;
+import org.usfirst.frc.team2022.robot.*;
 
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;;
+
 /**
+ *
+ *@author Mike Dow
+ *@author Ben Maher
  *
  */
 public class ForkliftCommand extends Command {
 
-	Attack3 joystick;
+	Attack3 stick;
+
+	
     public ForkliftCommand() {
     	requires(Robot.fork);
         // Use requires() here to declare subsystem dependencies
@@ -27,6 +36,14 @@ public class ForkliftCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
+    	if (OI.attack3a.GetButton(4).get()){
+    		Forklift.moveForklift(1);
+    	}
+    	if(OI.attack3a.GetButton(3).get()){
+    		Forklift.moveForklift(-1);
+    	}
+    	
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -36,12 +53,13 @@ public class ForkliftCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	
+    	Forklift.moveForklift(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	
+    	Forklift.moveForklift(0);
     }
+    
 }
