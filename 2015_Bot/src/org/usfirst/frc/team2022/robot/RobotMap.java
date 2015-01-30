@@ -30,6 +30,7 @@ public class RobotMap {
 	public static int clawPressureSwitchChannel = -1;
 	public static int clawValveChannel1 = -1;
 	public static int clawValveChannel2 = -1;
+	public static int lidarScalar = 0;
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;
