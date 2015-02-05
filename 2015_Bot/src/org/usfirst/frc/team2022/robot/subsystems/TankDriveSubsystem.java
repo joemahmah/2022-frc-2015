@@ -15,7 +15,8 @@ public class TankDriveSubsystem extends Subsystem {
 	private final Jaguar frontLeft,frontRight,rearLeft,rearRight;
 	private double leftSpeed,rightSpeed;
 	private boolean inverted;
-	public TankDriveSubsystem(){
+
+	public TankDriveSubsystem() {
 		frontLeft = new Jaguar(RobotMap.leftMotorFront);
 		frontRight = new Jaguar(RobotMap.rightMotorFront);
 		rearLeft = new Jaguar(RobotMap.leftMotorBack);

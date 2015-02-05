@@ -15,13 +15,14 @@ import edu.wpi.first.wpilibj.vision.AxisCamera;
 /**
  *
  */
-//XXX implement?
+//XXX implement??
 public class CameraSubsystem extends Subsystem {
 	public final AxisCamera camera;
 	
 	public CameraSubsystem(){
 		camera = new AxisCamera(RobotMap.cameraName);
 		//TODO initialize camera
+		//TODO Use NIVision
 	}
 
     public void initDefaultCommand() {
@@ -29,7 +30,8 @@ public class CameraSubsystem extends Subsystem {
     }
     public HSLImage getImage() throws NIVisionException{
     	return camera.getImage();
-    }//XXX???????????
+    }
+    //XXX???????????
     public byte[] getBytes() throws NIVisionException{
     	HSLImage image = getImage();
     	ByteBuffer b = RobotUtils.newDirectByteBuffer(image.image.getAddress(),

@@ -276,7 +276,7 @@ public class Xbox extends Joystick {
 	 * @return The magnitude of the left joystick.
 	 */
 	public double GetLeftMagnitude() {
-		return (Limit(Math.sqrt(Math.pow(GetLeftX(), (double) (2)) + Math.pow(GetLeftY(), (double) (2)))));
+		return (Limit(Math.sqrt(Math.pow(GetLeftX(), (2)) + Math.pow(GetLeftY(), (2)))));
 	}
 
 	/**
@@ -286,7 +286,7 @@ public class Xbox extends Joystick {
 	 * @return The magnitude of the right joystick.
 	 */
 	public double GetRightMagnitude() {
-		return (Limit(Math.sqrt(Math.pow(GetRightX(), (double) (2)) + Math.pow(GetRightY(), (double) (2)))));
+		return (Limit(Math.sqrt(Math.pow(GetRightX(), (2)) + Math.pow(GetRightY(), (2)))));
 	}
 
 	////////////////Get Raw Button Methods to be used by Command/Subsystem Interface

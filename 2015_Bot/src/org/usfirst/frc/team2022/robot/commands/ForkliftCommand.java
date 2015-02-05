@@ -1,9 +1,9 @@
 
 package org.usfirst.frc.team2022.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team2022.robot.subsystems.Forklift;
 import org.usfirst.frc.team2022.robot.Robot;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 
 
@@ -13,31 +13,38 @@ import org.usfirst.frc.team2022.robot.Robot;
  */
 public class ForkliftCommand extends Command {
 
-    public ForkliftCommand() {
-        // Use requires() here to declare subsystem dependencies
-//        requires(Robot.);
-    }
+    boolean isDone=false;
 
-    // Called just before this Command runs the first time
+	public ForkliftCommand() {
+        requires(Robot.forkliftSubsystem);
+    }
+    @Override
     protected void initialize() {
     }
 
-    // Called repeatedly when this Command is scheduled to run
+    @Override
     protected void execute() {
-    //call Forklift.toTop() and Forklift.toBottom() depending on controller input
+    	double throttle = Robot.oi.attack4.getThrottle();
+    	//forwards == down, backwards == up
+		if(throttle > Robot.oi.attackThrottleSensitivity && !Robot.forkliftSubsystem.isLowerLimit){
+			Robot.forkliftSubsystem.moveForklift(-1);
+		}else if(throttle < -Robot.oi.attackThrottleSensitivity && !Robot.forkliftSubsystem.isUpperLimit){
+			Robot.forkliftSubsystem.moveForklift(1);
+		}else{
+			Robot.forkliftSubsystem.moveForklift(0);
+		}
     }
-
-    // Make this return true when this Command no longer needs to run execute()
+    
+    @Override
     protected boolean isFinished() {
-        return !(Forklift.isUpperLimit);
+        return isDone;
     }
 
-    // Called once after isFinished returns true
+    @Override
     protected void end() {
     }
-
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
+    
+    @Override
     protected void interrupted() {
     	end();
     }

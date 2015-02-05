@@ -10,11 +10,15 @@ import org.usfirst.frc.team2022.robot.controllers.Xbox;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
+	//User interface Constants
+	public final double attackThrottleSensitivity=.1;
+	//Controllers
 	public final Xbox xbox;
-	public final Attack3 attack3;
+	public final Attack3 attack3,attack4;
 	public OI(){
 		xbox = new Xbox(2);
 		attack3 = new Attack3(3);
+		attack4 = new Attack3(4);
 	}
 //------------------------------CUT HERE----------------------------------------
 	//EVERYTHING BELOW HERE IS DEPRECEATED AND NO USE
