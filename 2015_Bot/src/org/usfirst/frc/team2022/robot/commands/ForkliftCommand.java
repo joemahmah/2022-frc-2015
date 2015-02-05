@@ -15,7 +15,7 @@ public class ForkliftCommand extends Command {
 
     public ForkliftCommand() {
         // Use requires() here to declare subsystem dependencies
-        requires();
+//        requires(Robot.);
     }
 
     // Called just before this Command runs the first time
