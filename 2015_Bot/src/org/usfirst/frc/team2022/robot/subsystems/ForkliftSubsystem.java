@@ -18,7 +18,7 @@ public class ForkliftSubsystem extends Subsystem {
 	public boolean isLowerLimit;
 	
 	public ForkliftSubsystem(){
-		winchMotor = new Jaguar(RobotMap.winch) ;
+		winchMotor = new Jaguar(RobotMap.winchMotor) ;
 		upperLimit = new DigitalInput(RobotMap.upperLimitSwitchPort);
 		lowerLimit = new DigitalInput(RobotMap.lowerLimitSwitchPort);
 	}
