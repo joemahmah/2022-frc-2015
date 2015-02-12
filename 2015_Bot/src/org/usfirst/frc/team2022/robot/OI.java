@@ -16,9 +16,9 @@ public class OI {
 	public final Xbox xbox;
 	public final Attack3 attack3,attack4;
 	public OI(){
-		xbox = new Xbox(2);
-		attack3 = new Attack3(3);
-		attack4 = new Attack3(4);
+		xbox = new Xbox(1);
+		attack3 = new Attack3(2);
+		attack4 = new Attack3(3);
 	}
 //------------------------------CUT HERE----------------------------------------
 	//EVERYTHING BELOW HERE IS DEPRECEATED AND NO USE
