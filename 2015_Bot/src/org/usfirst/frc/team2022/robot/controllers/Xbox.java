@@ -14,11 +14,12 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class Xbox extends Joystick {
 
 	//Axes
-	private static final int LEFT_XAXIS = 1;
-	private static final int LEFT_YAXIS = 2;
+	private static final int LEFT_XAXIS = 0;
+	private static final int LEFT_YAXIS = 1;
 	private static final int RIGHT_XAXIS = 4;
 	private static final int RIGHT_YAXIS = 5;
-	private static final int TRIGGERS = 3;
+	private static final int TRIGGERS_LEFT = 2;
+	private static final int TRIGGERS_RIGHT = 3;
 	//Buttons
 	private static final int ABUTTON = 1;
 	private static final int BBUTTON = 2;
@@ -59,7 +60,7 @@ public class Xbox extends Joystick {
 	 * @return The value of the axis from -1 to 1.
 	 */
 	public double GetLeftY() {
-		return (-1 * GetRawAxis(LEFT_YAXIS));
+		return (1 * GetRawAxis(LEFT_YAXIS));
 		//Multiply output by -1 because GetAxis() returns the axis backwards.
 	}
 
@@ -91,8 +92,12 @@ public class Xbox extends Joystick {
 	 * @param
 	 * @return The value corresponding to the triggers.
 	 */
-	public double GetTriggers() {
-		return (GetRawAxis(TRIGGERS));
+	public double GetRightTriggers() {
+		return (GetRawAxis(TRIGGERS_RIGHT));
+	}
+	
+	public double GetLeftTriggers() {
+		return (GetRawAxis(TRIGGERS_LEFT));
 	}
 
 	/**

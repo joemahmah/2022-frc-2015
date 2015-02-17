@@ -1,42 +1,84 @@
 package org.usfirst.frc.team2022.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team2022.robot.OI;
-import org.usfirst.frc.team2022.robot.Robot;
+import org.usfirst.frc.team2022.robot.RobotMain;
+import org.usfirst.frc.team2022.robot.controllers.Xbox;
+import org.usfirst.frc.team2022.robot.subsystems.PneumaticSubsystem;
+import org.usfirst.frc.team2022.robot.subsystems.TankDriveSubsystem;
 
 /**
  *
  */
 public class TankDriveCommand extends Command {
+	
+	OI oi = RobotMain.oi;
+	TankDriveSubsystem tankSubsystem;
+	PneumaticSubsystem pneumaticSubsystem;
+	boolean shifterActivated = false;
+	
+	int toggle = 0;
+	
 	public TankDriveCommand() {
-		requires(Robot.tankSubsystem);
+		requires(RobotMain.tankSubsystem);
+		requires(RobotMain.pneumaticSubsystem);
+		tankSubsystem = RobotMain.tankSubsystem;
+		pneumaticSubsystem = RobotMain.pneumaticSubsystem;
 	}
 
 	@Override
 	protected void initialize() {
+//		SmartDashboard.putString("TankDrive", "COMMAND_INIT");
 	}
 
 	@Override
 	protected void execute() {
-		OI oi = Robot.oi;
 		double speedModifier = .75;
 		double right = Math.max(Math.min(oi.xbox.GetRightY(), 1), -1);
-		double left = Math.max(Math.min(oi.xbox.GetRightY(), 1), -1);
-		if (oi.xbox.GetBValue()) {
-			Robot.tankSubsystem.toggleInversion();
+		double left = Math.max(Math.min(oi.xbox.GetLeftY(), 1), -1);
+		
+		if(oi.attack3.getButton(3) || oi.attack4.getButton(3)){
+    		pneumaticSubsystem.toggleClawState();
+    	}
+		
+		if (oi.xbox.GetRightBumperValue()) {
+			tankSubsystem.toggleInversion();
 		}
-		if (oi.xbox.GetLeftBumperValue()) {
-			if (oi.xbox.GetStartButton().get()) {
-				speedModifier = .25;// fast turtle
-			} else {
-				speedModifier = .5;// turtle
-			}
-		} else if (oi.xbox.GetRightBumperValue()) { // turbo
-			speedModifier = 1;
+		
+//		if(tankSubsystem.isInverted()){
+//			speedModifier = .3;
+//		}
+		
+		if (oi.xbox.GetLeftTriggers() > 0.1) { // turtle
+			speedModifier = .5; 
+		} else if (oi.xbox.GetRightTriggers() > 0.1) { // turbo
+			speedModifier = 1; 
 		}
-		Robot.tankSubsystem.setLeftSpeed(left * speedModifier);
-		Robot.tankSubsystem.setRightSpeed(right * speedModifier);
+		
+		if(tankSubsystem.isInverted()){
+			tankSubsystem.setLeftSpeed(right * speedModifier);
+			tankSubsystem.setRightSpeed(left * speedModifier);
+		}else{
+			tankSubsystem.setLeftSpeed(left * speedModifier);
+			tankSubsystem.setRightSpeed(right * speedModifier);
+		}
+		
+		
+		
+		//Shifter Stuff goes down here
+		if(oi.xbox.GetLeftBumperValue()){
+			pneumaticSubsystem.toggleShifterState();
+		}
+
+//		tankSubsystem.setLeftSpeed(.2);
+//		tankSubsystem.setRightSpeed(.2);
+//		
+//		if(oi.xbox.GetAValue()){
+//			pneumaticSubsystem.openShifterValve();
+//		}
+		
 	}
 
 	@Override
@@ -46,7 +88,7 @@ public class TankDriveCommand extends Command {
 
 	@Override
 	protected void end() {
-		Robot.tankSubsystem.stop();
+		RobotMain.tankSubsystem.stop();
 	}
 
 	@Override

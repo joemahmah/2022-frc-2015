@@ -6,27 +6,28 @@ package org.usfirst.frc.team2022.robot;
  * floating around.
  */
 public class RobotMap {
-	// Tank Drive Motors
-	public static int leftMotorFront = 3;
-	public static int leftMotorBack = 4;
-	public static int rightMotorFront = 2;
-	public static int rightMotorBack = 1;
-	//Camera Host Name
-	public static String cameraName = "$\u0004";
-	//Pneumatic Shifters
-	public static int shiftPressureSwitchChannel = 0;
+	//Tank
+	public static int leftMotorFront = 2;
+	public static int leftMotorBack = 3;
+	public static int rightMotorFront = 1;
+	public static int rightMotorBack = 0;
+
+	//Pneumatics
+	public static int compressor = 2;
 	public static int shiftValveChannel1 = 0;
-	public static int shiftValveChannel2 = 0;
-	// Claw Pneumatics
-	public static int clawPressureSwitchChannel = 0;
-	public static int clawValveChannel1 = 0;
-	public static int clawValveChannel2 = 0;
+	public static int shiftValveChannel2 = 1;
+	public static int clawValveChannel1 = 2;
+	public static int clawValveChannel2 = 3;
+	
+	//Misc Sensors
 	public static int gyroChannel = 4;
-	//Lidar
-	public static int lidarPort = 0;
+	public static int lidarPort = 3;
 	public static int lidarScalar = 1;//Not a port
+	
 	//Forklift
-	public static int upperLimitSwitchPort = 0;
-	public static int lowerLimitSwitchPort = 0;
-	public static int winchMotor = 5;
+	public static int upperLimitSwitchPort = 1;
+	public static int lowerLimitSwitchPort = 2;
+	public static int winchMotor = 4;
+	public static int winchEncoderChannelA = 5;
+	public static int winchEncoderChannelB = 6;
 }

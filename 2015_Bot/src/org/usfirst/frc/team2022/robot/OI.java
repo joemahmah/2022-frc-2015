@@ -11,14 +11,14 @@ import org.usfirst.frc.team2022.robot.controllers.Xbox;
  */
 public class OI {
 	//User interface Constants
-	public final double attackThrottleSensitivity=.1;
+	public double attackThrottleSensitivity=.1;
 	//Controllers
-	public final Xbox xbox;
-	public final Attack3 attack3,attack4;
+	public Xbox xbox;
+	public Attack3 attack3,attack4;
 	public OI(){
-		xbox = new Xbox(1);
-		attack3 = new Attack3(2);
-		attack4 = new Attack3(3);
+		xbox = new Xbox(0);
+		attack3 = new Attack3(1);
+		attack4 = new Attack3(2);
 	}
 //------------------------------CUT HERE----------------------------------------
 	//EVERYTHING BELOW HERE IS DEPRECEATED AND NO USE

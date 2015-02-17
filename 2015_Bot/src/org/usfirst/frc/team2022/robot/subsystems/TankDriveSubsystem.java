@@ -1,86 +1,88 @@
-
 package org.usfirst.frc.team2022.robot.subsystems;
+
+import java.sql.Time;
+import java.util.Calendar;
+import java.util.Timer;
 
 import org.usfirst.frc.team2022.robot.RobotMap;
 import org.usfirst.frc.team2022.robot.commands.TankDriveCommand;
 
+import edu.wpi.first.wpilibj.CANJaguar;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.hal.CanTalonSRX;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class TankDriveSubsystem extends Subsystem {
-	public double motorSpeed=1;
-	private final Jaguar frontLeft,frontRight,rearLeft,rearRight;
-	private double leftSpeed,rightSpeed;
+	private CanTalonSRX frontLeft, frontRight, rearLeft, rearRight;
+	private double leftSpeed, rightSpeed;
 	private boolean inverted;
+	private long lastTime;
 
 	public TankDriveSubsystem() {
-		frontLeft = new Jaguar(RobotMap.leftMotorFront);
-		frontRight = new Jaguar(RobotMap.rightMotorFront);
-		rearLeft = new Jaguar(RobotMap.leftMotorBack);
-		rearRight = new Jaguar(RobotMap.rightMotorBack);
+		// SmartDashboard.putString("TankDrive", "SUBSYSTEM_INIT"); //Will
+		// crash. TODO: fix?
+		frontLeft = new CanTalonSRX(RobotMap.leftMotorFront);
+		frontRight = new CanTalonSRX(RobotMap.rightMotorFront);
+		rearLeft = new CanTalonSRX(RobotMap.leftMotorBack);
+		rearRight = new CanTalonSRX(RobotMap.rightMotorBack);
+
+		inverted = false;
+		lastTime = System.currentTimeMillis();
 	}
-	@Override //this is important for WPILib.
+
+	@Override
+	// this is important for WPILib.
 	public void initDefaultCommand() {
-        setDefaultCommand(new TankDriveCommand());
-    }
-	//Speed Manipulation Methods-these are more fine grained
+		setDefaultCommand(new TankDriveCommand());
+
+	}
+
+	// Speed Manipulation Methods-these are more fine grained
 	public double getLeftSpeed() {
 		return leftSpeed;
 	}
+
 	public double getRightSpeed() {
 		return rightSpeed;
 	}
-	public void setLeftSpeed(double ls){
+
+	public void setLeftSpeed(double ls) {
 		leftSpeed = ls;
-		frontLeft.set(ls);
-		rearLeft.set(ls);
+		frontLeft.Set(ls);
+		rearLeft.Set(ls);
 	}
-	public void setRightSpeed(double rs){
+
+	public void setRightSpeed(double rs) {
 		rightSpeed = rs;
-		frontRight.set(rs);
-		rearRight.set(rs);
+		frontRight.Set(rs);
+		rearRight.Set(rs);
 	}
-	//Inversion
-	public boolean isInverted(){
+
+	// Inversion
+	public boolean isInverted() {
 		return inverted;
 	}
-	public void toggleInversion(){
-		inverted = !inverted;
-		motorSpeed *= -1;
-		leftSpeed *= -1;
-		rightSpeed *= -1;
-	}
-    //Forwards and Reverse Control for each side.
-    public void forwardLeft(){
-    	frontLeft.set(motorSpeed);
-    	rearLeft.set(motorSpeed);
-    	leftSpeed=motorSpeed;
-    }
-    public void backwardLeft(){
-    	frontLeft.set(-motorSpeed);
-    	rearLeft.set(-motorSpeed);
-    	leftSpeed = -motorSpeed;
-    }
-    public void forwardRight(){
-    	frontRight.set(motorSpeed);
-    	rearRight.set(motorSpeed);
-    	rightSpeed=motorSpeed;
-    }
-    public void backwardRight(){
-    	frontRight.set(-motorSpeed);
-    	rearRight.set(-motorSpeed);
-    	rightSpeed=-motorSpeed;
-    }
-    public void stop(){
-    	frontRight.stopMotor();
-    	frontLeft.stopMotor();
-    	rearRight.stopMotor();
-    	rearLeft.stopMotor();
-    	rightSpeed = 0;
-    	leftSpeed = 0;
-    }
-}
 
+	public void toggleInversion() {
+		if (System.currentTimeMillis() > lastTime + 250) {
+			lastTime = System.currentTimeMillis();
+			inverted = !inverted;
+			leftSpeed *= -1;
+			rightSpeed *= -1;
+		}
+	}
+
+	// Forwards and Reverse Control for each side.
+	public void stop() {
+		frontRight.Set(0);
+		frontLeft.Set(0);
+		rearRight.Set(0);
+		rearLeft.Set(0);
+		rightSpeed = 0;
+		leftSpeed = 0;
+	}
+}

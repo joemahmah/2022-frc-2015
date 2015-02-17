@@ -27,6 +27,16 @@ public class Attack3 extends Joystick {
 	public Attack3(int port) {
 		super(port);
 	} 
+	
+	public double getXAxis(){
+		return getX();
+//		return getAxis(Joystick.AxisType.kX);
+	}
+	
+	public double getYAxis(){
+		return getY();
+//		return getAxis(Joystick.AxisType.kY);
+	}
 	/**
 	 * Return the value of the Twist axis for this joystick This value is always
 	 * 0 since there is no twist axis.
@@ -43,5 +53,9 @@ public class Attack3 extends Joystick {
 	 */
 	public JoystickButton GetButton(int button) {
 		return (new JoystickButton(this, button));
+	}
+	
+	public boolean getButton(int button) {
+		return (new JoystickButton(this, button)).get();
 	}
 }
