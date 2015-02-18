@@ -9,7 +9,8 @@ import org.usfirst.frc.team2022.robot.controllers.Xbox;
 import org.usfirst.frc.team2022.robot.subsystems.PneumaticSubsystem;
 import org.usfirst.frc.team2022.robot.subsystems.TankDriveSubsystem;
 
-/**
+/**@author Michael Dow
+ * @author Ben Maher
  *
  */
 public class TankDriveCommand extends Command {
@@ -36,14 +37,14 @@ public class TankDriveCommand extends Command {
 	@Override
 	protected void execute() {
 		double speedModifier = .75;
-		double right = Math.max(Math.min(oi.xbox.GetRightY(), 1), -1);
-		double left = Math.max(Math.min(oi.xbox.GetLeftY(), 1), -1);
+		double right = Math.max(Math.min(oi.attack3.getYAxis(), 1), -1);
+		double left = Math.max(Math.min(oi.attack4.getYAxis(), 1), -1);
 		
-		if(oi.attack3.getButton(3) || oi.attack4.getButton(3)){
+		if(oi.xbox.GetYValue()){
     		pneumaticSubsystem.toggleClawState();
     	}
 		
-		if (oi.xbox.GetRightBumperValue()) {
+		if (oi.attack3.getButton(4)) {
 			tankSubsystem.toggleInversion();
 		}
 		
@@ -51,9 +52,9 @@ public class TankDriveCommand extends Command {
 //			speedModifier = .3;
 //		}
 		
-		if (oi.xbox.GetLeftTriggers() > 0.1) { // turtle
+		if (oi.attack3.getButton(1)) { // turtle
 			speedModifier = .5; 
-		} else if (oi.xbox.GetRightTriggers() > 0.1) { // turbo
+		} else if (oi.attack4.getButton(4)) { // turbo
 			speedModifier = 1; 
 		}
 		
@@ -68,7 +69,7 @@ public class TankDriveCommand extends Command {
 		
 		
 		//Shifter Stuff goes down here
-		if(oi.xbox.GetLeftBumperValue()){
+		if(oi.attack3.getButton(1)){
 			pneumaticSubsystem.toggleShifterState();
 		}
 
