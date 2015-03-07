@@ -14,70 +14,104 @@ import org.usfirst.frc.team2022.robot.subsystems.TankDriveSubsystem;
  */
 public class TankDriveCommand extends Command {
 	
-	OI oi = RobotMain.oi;
-	TankDriveSubsystem tankSubsystem;
-	PneumaticSubsystem pneumaticSubsystem;
-	boolean shifterActivated = false;
+	private OI oi = RobotMain.oi;
+	private TankDriveSubsystem tankSubsystem;
+	private PneumaticSubsystem pneumaticSubsystem;
+	private boolean shifterActivated = false;
 	
-	int toggle = 0;
+	private final static int gracePeriodMS = 500;
+	
+	//To be used with button combos?
+	private long lastLeftTrigger;
+	private long lastRightTrigger;
+	private long lastLeftBumper;
+	private long lastRightBumper;
+	
+	private int driveState;
+	
+	private final static int STICK_TANK = 0;
+	private final static int STICK_LR = 1;
+	private final static int STICK_L = 2;
+	private final static int MAX_DRIVE_STATE = 2;
 	
 	public TankDriveCommand() {
 		requires(RobotMain.tankSubsystem);
 		requires(RobotMain.pneumaticSubsystem);
-		tankSubsystem = RobotMain.tankSubsystem;
-		pneumaticSubsystem = RobotMain.pneumaticSubsystem;
 	}
 
 	@Override
 	protected void initialize() {
-//		SmartDashboard.putString("TankDrive", "COMMAND_INIT");
+		tankSubsystem = RobotMain.tankSubsystem;
+		pneumaticSubsystem = RobotMain.pneumaticSubsystem;
+
+		lastLeftTrigger = System.currentTimeMillis() - gracePeriodMS;
+		lastRightTrigger = System.currentTimeMillis() - gracePeriodMS;
+		lastLeftBumper = System.currentTimeMillis() - gracePeriodMS;
+		lastRightBumper = System.currentTimeMillis() - gracePeriodMS;
+		
+		driveState = STICK_TANK;
+		
 	}
 
 	@Override
 	protected void execute() {
 		double speedModifier = .75;
+		
+		//Driver inputs w/ dead zone
 		double right = Math.max(Math.min(oi.xbox.GetRightY(), 1), -1);
 		double left = Math.max(Math.min(oi.xbox.GetLeftY(), 1), -1);
+		if(left < .1){
+			left = 0;
+		}
+		if(right < .1){
+			right = 0;
+		}
 		
-		if(oi.attack3.getButton(3) || oi.attack4.getButton(3)){
-    		pneumaticSubsystem.toggleClawState();
-    	}
+		//Pressed objects
+		boolean leftTrigger = oi.xbox.GetLeftTriggers() > .1;
+		boolean rightTrigger = oi.xbox.GetRightTriggers() > .1;
+		boolean leftBumper = oi.xbox.GetLeftBumperValue();
+		boolean rightBumper = oi.xbox.GetRightBumperValue();
 		
-		if (oi.xbox.GetRightBumperValue()) {
+		if (rightBumper) {
 			tankSubsystem.toggleInversion();
+			lastRightBumper = System.currentTimeMillis();
 		}
 		
-//		if(tankSubsystem.isInverted()){
-//			speedModifier = .3;
-//		}
-		
-		if (oi.xbox.GetLeftTriggers() > 0.1) { // turtle
+		if (leftTrigger && !rightTrigger) { // turtle
 			speedModifier = .5; 
-		} else if (oi.xbox.GetRightTriggers() > 0.1) { // turbo
+			lastLeftTrigger = System.currentTimeMillis();
+		} else if (rightTrigger && !leftTrigger) { // turbo
 			speedModifier = 1; 
+			lastRightTrigger = System.currentTimeMillis();
+		} else if(rightTrigger && leftTrigger){
+			switchMode();
 		}
 		
-		if(tankSubsystem.isInverted()){
-			tankSubsystem.setLeftSpeed(right * speedModifier);
-			tankSubsystem.setRightSpeed(left * speedModifier);
-		}else{
-			tankSubsystem.setLeftSpeed(left * speedModifier);
-			tankSubsystem.setRightSpeed(right * speedModifier);
+		switch(driveState){
+		case STICK_TANK:
+			if(tankSubsystem.isInverted()){
+				tankSubsystem.setLeftSpeed(right * speedModifier);
+				tankSubsystem.setRightSpeed(left * speedModifier);
+			}else{
+				tankSubsystem.setLeftSpeed(left * speedModifier);
+				tankSubsystem.setRightSpeed(right * speedModifier);
+			}
+			break;
+		case STICK_LR:
+			
+			break;
+		case STICK_L:
+			
+			break;
 		}
-		
 		
 		
 		//Shifter Stuff goes down here
-		if(oi.xbox.GetLeftBumperValue()){
+		if(leftBumper){
 			pneumaticSubsystem.toggleShifterState();
+			lastLeftBumper = System.currentTimeMillis();
 		}
-
-//		tankSubsystem.setLeftSpeed(.2);
-//		tankSubsystem.setRightSpeed(.2);
-//		
-//		if(oi.xbox.GetAValue()){
-//			pneumaticSubsystem.openShifterValve();
-//		}
 		
 	}
 
@@ -94,5 +128,13 @@ public class TankDriveCommand extends Command {
 	@Override
 	protected void interrupted() {
 		end();
+	}
+	
+	protected void switchMode(){
+		driveState++;
+		
+		if(driveState > MAX_DRIVE_STATE){
+			driveState = 0;
+		}
 	}
 }
