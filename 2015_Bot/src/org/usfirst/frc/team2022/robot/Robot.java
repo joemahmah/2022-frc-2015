@@ -5,6 +5,7 @@ import org.usfirst.frc.team2022.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2022.robot.commands.ForkliftCommand;
 import org.usfirst.frc.team2022.robot.commands.ShifterCommand;
 import org.usfirst.frc.team2022.robot.commands.TankDriveCommand;
+import org.usfirst.frc.team2022.robot.commands.autonomous.Autonomous;
 import org.usfirst.frc.team2022.robot.subsystems.CameraSubsystem;
 import org.usfirst.frc.team2022.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2022.robot.subsystems.ForkliftSubsystem;
@@ -53,7 +54,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		// instantiate the command used for the autonomous period
-		autonomousCommand = new ExampleCommand();
+		autonomousCommand = new Autonomous();
 		// instantiate the real commands
 		tankCommand = new TankDriveCommand();
 		clawCommand = new ClawCommand();
