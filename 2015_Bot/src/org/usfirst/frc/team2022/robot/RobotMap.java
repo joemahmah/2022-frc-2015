@@ -30,4 +30,8 @@ public class RobotMap {
 	public static int winchMotor = 4;
 	public static int winchEncoderChannelA = 5;
 	public static int winchEncoderChannelB = 6;
+	
+	//Intake
+	public static int rightIntake = 1;
+	public static int leftIntake = 2;
 }

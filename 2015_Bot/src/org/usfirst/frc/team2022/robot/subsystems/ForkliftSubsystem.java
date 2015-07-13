@@ -17,15 +17,15 @@ import org.usfirst.frc.team2022.robot.commands.ForkliftCommand;
 public class ForkliftSubsystem extends Subsystem {
 	private CanTalonSRX winchMotor;
 	private Encoder winchEncoder;
-//	private DigitalInput upperLimit;
-//	private DigitalInput lowerLimit;
+	private DigitalInput upperLimit;
+	private DigitalInput lowerLimit;
 	//set isUpperLimit and isLowerLimit based on the limit switch
 	
 	public ForkliftSubsystem(){
 		winchMotor = new CanTalonSRX(RobotMap.winchMotor) ;
 		winchEncoder = new Encoder(RobotMap.winchEncoderChannelA, RobotMap.winchEncoderChannelB);
-//		upperLimit = new DigitalInput(RobotMap.upperLimitSwitchPort);
-//		lowerLimit = new DigitalInput(RobotMap.lowerLimitSwitchPort);
+		upperLimit = new DigitalInput(RobotMap.upperLimitSwitchPort);
+		lowerLimit = new DigitalInput(RobotMap.lowerLimitSwitchPort);
 	}
 
 	public void initDefaultCommand() {
@@ -33,20 +33,17 @@ public class ForkliftSubsystem extends Subsystem {
 	}
 	
 	public void moveForklift(double winchSpeed){
-//		if(!upperLimit.get() && !lowerLimit.get()){
-		if(true){
+		if(!upperLimit.get() && !lowerLimit.get()){
 			winchMotor.Set(winchSpeed);
 		}else{
 			winchMotor.Set(0);
 		}
 	}
 	public boolean getUpperLimit(){
-//		return upperLimit.get();
-		return false;
+		return upperLimit.get();
 	}
 	public boolean getLowerLimit(){
-//		return lowerLimit.get();
-		return false;
+		return lowerLimit.get();
 	}
 }
 
