@@ -1,28 +1,26 @@
 
 package org.usfirst.frc.team2022.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.hal.CanTalonSRX;
-import edu.wpi.first.wpilibj.CANJaguar;
-import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Jaguar;
-
 import org.usfirst.frc.team2022.robot.RobotMap;
 import org.usfirst.frc.team2022.robot.commands.ForkliftCommand;
+
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
 public class ForkliftSubsystem extends Subsystem {
-	private CanTalonSRX winchMotor;
+	private Talon winchMotor;
 	private Encoder winchEncoder;
 	private DigitalInput upperLimit;
 	private DigitalInput lowerLimit;
 	//set isUpperLimit and isLowerLimit based on the limit switch
 	
 	public ForkliftSubsystem(){
-		winchMotor = new CanTalonSRX(RobotMap.winchMotor) ;
+		winchMotor = new Talon(RobotMap.winchMotor) ;
 		winchEncoder = new Encoder(RobotMap.winchEncoderChannelA, RobotMap.winchEncoderChannelB);
 		upperLimit = new DigitalInput(RobotMap.upperLimitSwitchPort);
 		lowerLimit = new DigitalInput(RobotMap.lowerLimitSwitchPort);
@@ -34,9 +32,9 @@ public class ForkliftSubsystem extends Subsystem {
 	
 	public void moveForklift(double winchSpeed){
 		if(!upperLimit.get() && !lowerLimit.get()){
-			winchMotor.Set(winchSpeed);
+			winchMotor.set(winchSpeed);
 		}else{
-			winchMotor.Set(0);
+			winchMotor.set(0);
 		}
 	}
 	public boolean getUpperLimit(){
