@@ -1,14 +1,14 @@
 package org.usfirst.frc.team2022.robot;
 
-import org.usfirst.frc.team2022.robot.commands.ClawCommand;
-import org.usfirst.frc.team2022.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2022.robot.commands.ForkliftCommand;
-import org.usfirst.frc.team2022.robot.commands.ShifterCommand;
+import org.usfirst.frc.team2022.robot.commands.IntakeCommand;
 import org.usfirst.frc.team2022.robot.commands.TankDriveCommand;
+import org.usfirst.frc.team2022.robot.commands.autonomous.Autonomous;
 import org.usfirst.frc.team2022.robot.subsystems.CameraSubsystem;
 import org.usfirst.frc.team2022.robot.subsystems.ExampleSubsystem;
 import org.usfirst.frc.team2022.robot.subsystems.ForkliftSubsystem;
 import org.usfirst.frc.team2022.robot.subsystems.GyroSubsystem;
+import org.usfirst.frc.team2022.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team2022.robot.subsystems.PneumaticSubsystem;
 import org.usfirst.frc.team2022.robot.subsystems.TankDriveSubsystem;
 
@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  * documentation. If you change the name of this class or the package after
  * creating this project, you must also update the manifest file in the resource
  * directory.
- */
+ */ 
 public class Robot extends IterativeRobot {
 
 	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
@@ -38,12 +38,14 @@ public class Robot extends IterativeRobot {
 			RobotMap.clawPressureSwitchChannel, RobotMap.clawValveChannel1,
 			RobotMap.clawValveChannel2);
 	public static OI oi;
+	public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 
 	Command autonomousCommand;
 	TankDriveCommand tankCommand;
 	ClawCommand clawCommand;
 	ForkliftCommand forkliftCommand;
 	ShifterCommand shifterCommand;
+	IntakeCommand intakeCommand;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -53,12 +55,13 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		// instantiate the command used for the autonomous period
-		autonomousCommand = new ExampleCommand();
+		autonomousCommand = new Autonomous();
 		// instantiate the real commands
 		tankCommand = new TankDriveCommand();
 		clawCommand = new ClawCommand();
 		forkliftCommand = new ForkliftCommand();
 		shifterCommand = new ShifterCommand();
+		intakeComand = new IntakeCommand();
 	}
 
 	@Override
@@ -68,7 +71,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void autonomousInit() {
-		// schedule the autonomous command (example)
+		// schedule the autonomous command
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 	}
@@ -89,6 +92,7 @@ public class Robot extends IterativeRobot {
 		clawCommand.start();
 		forkliftCommand.start();
 		shifterCommand.start();
+		intakeCommand.start();
 	}
 
 	/**

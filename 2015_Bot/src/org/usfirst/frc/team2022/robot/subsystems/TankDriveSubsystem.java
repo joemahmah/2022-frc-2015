@@ -1,40 +1,52 @@
 package org.usfirst.frc.team2022.robot.subsystems;
 
-import java.sql.Time;
-import java.util.Calendar;
-import java.util.Timer;
+import java.lang.invoke.ConstantCallSite;
 
 import org.usfirst.frc.team2022.robot.RobotMap;
 import org.usfirst.frc.team2022.robot.commands.TankDriveCommand;
 
-import edu.wpi.first.wpilibj.CANJaguar;
-import edu.wpi.first.wpilibj.Jaguar;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.hal.CanTalonSRX;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
  */
 public class TankDriveSubsystem extends Subsystem {
-	private CanTalonSRX frontLeft, frontRight, rearLeft, rearRight;
+	private Talon frontLeft, frontRight, rearLeft, rearRight;
 	private double leftSpeed, rightSpeed;
 	private boolean inverted;
 	private long lastTime;
+	private Encoder encoder;
 
 	public TankDriveSubsystem() {
 		// SmartDashboard.putString("TankDrive", "SUBSYSTEM_INIT"); //Will
 		// crash. TODO: fix?
-		frontLeft = new CanTalonSRX(RobotMap.leftMotorFront);
-		frontRight = new CanTalonSRX(RobotMap.rightMotorFront);
-		rearLeft = new CanTalonSRX(RobotMap.leftMotorBack);
-		rearRight = new CanTalonSRX(RobotMap.rightMotorBack);
+		frontLeft = new Talon(RobotMap.leftMotorFront);
+		frontRight = new Talon(RobotMap.rightMotorFront);
+		rearLeft = new Talon(RobotMap.leftMotorBack);
+		rearRight = new Talon(RobotMap.rightMotorBack);
 
 		inverted = false;
 		lastTime = System.currentTimeMillis();
+		
+		encoder = new Encoder(RobotMap.encoder1, RobotMap.encoder2, false);
+		encoder.setDistancePerPulse(4.7);
+		encoder.setDistancePerPulse((6 * Math.PI) / 360); //No idea if this is right, diameter * pi / pulses per revolution. Change to correct measurements
+		
+		encoder.reset();
+		
+	}
+	
+	public double getEncoderDistance(){
+		return encoder.getDistance();
+	}
+	
+	public void resetEncoder(){
+		encoder.reset();
 	}
 
-	@Override
+	@Override	
 	// this is important for WPILib.
 	public void initDefaultCommand() {
 		setDefaultCommand(new TankDriveCommand());
@@ -52,14 +64,14 @@ public class TankDriveSubsystem extends Subsystem {
 
 	public void setLeftSpeed(double ls) {
 		leftSpeed = ls;
-		frontLeft.Set(ls);
-		rearLeft.Set(ls);
+		frontLeft.set(ls);
+		rearLeft.set(ls);
 	}
 
 	public void setRightSpeed(double rs) {
 		rightSpeed = rs;
-		frontRight.Set(rs);
-		rearRight.Set(rs);
+		frontRight.set(rs);
+		rearRight.set(rs);
 	}
 
 	// Inversion
@@ -78,10 +90,10 @@ public class TankDriveSubsystem extends Subsystem {
 
 	// Forwards and Reverse Control for each side.
 	public void stop() {
-		frontRight.Set(0);
-		frontLeft.Set(0);
-		rearRight.Set(0);
-		rearLeft.Set(0);
+		frontRight.set(0);
+		frontLeft.set(0);
+		rearRight.set(0);
+		rearLeft.set(0);
 		rightSpeed = 0;
 		leftSpeed = 0;
 	}

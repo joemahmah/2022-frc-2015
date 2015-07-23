@@ -4,6 +4,7 @@ import org.usfirst.frc.team2022.robot.commands.ForkliftCommand;
 import org.usfirst.frc.team2022.robot.commands.TankDriveCommand;
 import org.usfirst.frc.team2022.robot.subsystems.ForkliftSubsystem;
 import org.usfirst.frc.team2022.robot.subsystems.GyroSubsystem;
+import org.usfirst.frc.team2022.robot.subsystems.IntakeSubsystem;
 import org.usfirst.frc.team2022.robot.subsystems.PneumaticSubsystem;
 import org.usfirst.frc.team2022.robot.subsystems.TankDriveSubsystem;
 
@@ -27,7 +28,7 @@ public class RobotMain extends IterativeRobot {
 			RobotMap.compressor, RobotMap.shiftValveChannel1,
 			RobotMap.shiftValveChannel2, RobotMap.clawValveChannel1, RobotMap.clawValveChannel2);
 	public static OI oi;
-
+	public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 	Command autonomousCommand;
 
 	/**
