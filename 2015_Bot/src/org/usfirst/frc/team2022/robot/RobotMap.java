@@ -34,4 +34,9 @@ public class RobotMap {
 	//Intake
 	public static int rightIntake = 1;
 	public static int leftIntake = 2;
+	
+	//Encoder
+	public static int encoder1 = 0;
+	public static int encoder2 = 1;
 }
+
