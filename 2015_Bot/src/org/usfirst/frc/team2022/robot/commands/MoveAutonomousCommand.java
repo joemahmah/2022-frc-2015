@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj.command.Command;
 public class MoveAutonomousCommand extends Command{
 	
 	TankDriveSubsystem tankSubsystem;
-	public int time;
 	public String direction;
+	public double distance;
 	
-	public MoveAutonomousCommand(int time, String direction){
+	public MoveAutonomousCommand(double distance, String direction){
 		this.direction = direction;
-		this.time = time;
+		this.distance = distance;
 		requires(RobotMain.tankSubsystem);
 		tankSubsystem = RobotMain.tankSubsystem;
 	}
@@ -25,49 +25,25 @@ public class MoveAutonomousCommand extends Command{
 
 	@Override
 	protected void execute() {
-		if(direction.equals("Straight")){
+		if(direction.equals("Forward")){
 			double speed = 1;
-			long firstTime;
-			long secondTime;
+			tankSubsystem.setLeftSpeed(speed);
+			tankSubsystem.setRightSpeed(speed);
 			
-			
-			firstTime = System.currentTimeMillis();
-			secondTime = System.currentTimeMillis() + time;
-			while(System.currentTimeMillis() < secondTime){
+		}else if(direction.equals("Right")){
+			double speed = .75;
+			long currentTime = System.currentTimeMillis();
+			long lastTime = currentTime + 1000;
+			while(System.currentTimeMillis() < lastTime){
 				tankSubsystem.setLeftSpeed(speed);
 				tankSubsystem.setRightSpeed(speed);
 			}
-			tankSubsystem.setLeftSpeed(0);
-			tankSubsystem.setRightSpeed(0);
-		}else if(direction.equals("Right")){
-			double speed = .75;
-			long firstTime;
-			long secondTime;
 			
-			
-			firstTime = System.currentTimeMillis();
-			secondTime = System.currentTimeMillis() + time;
-			while(System.currentTimeMillis() < secondTime){
-				tankSubsystem.setLeftSpeed(speed);
-				tankSubsystem.setRightSpeed(0);
-			}
-			tankSubsystem.setLeftSpeed(0);
-			tankSubsystem.setRightSpeed(0);
 		}
 		else if(direction.equals("Back")){
 			double speed = -1;
-			long firstTime;
-			long secondTime;
-			
-			
-			firstTime = System.currentTimeMillis();
-			secondTime = System.currentTimeMillis() + time;
-			while(System.currentTimeMillis() < secondTime){
-				tankSubsystem.setLeftSpeed(speed);
-				tankSubsystem.setRightSpeed(speed);
-			}
-			tankSubsystem.setLeftSpeed(0);
-			tankSubsystem.setRightSpeed(0);
+			tankSubsystem.setLeftSpeed(speed);
+			tankSubsystem.setRightSpeed(speed);
 		}
 		
 		
@@ -76,8 +52,7 @@ public class MoveAutonomousCommand extends Command{
 
 	@Override
 	protected void initialize() {
-		// TODO Auto-generated method stub
-		
+		tankSubsystem.resetEncoder();
 	}
 
 	@Override
@@ -87,7 +62,15 @@ public class MoveAutonomousCommand extends Command{
 
 	@Override
 	protected boolean isFinished() {
-		return true;
+		if(direction.equals("Forward")){
+			return (tankSubsystem.getEncoderDistance() >= distance);
+		}else if(direction.equals("Back")){
+			return (tankSubsystem.getEncoderDistance() <= distance);
+		}else{
+			return true;
+		}
+		
+		
 	}
 
 }

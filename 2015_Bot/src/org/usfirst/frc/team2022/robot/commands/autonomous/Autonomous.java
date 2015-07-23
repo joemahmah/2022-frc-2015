@@ -12,27 +12,40 @@ public class Autonomous extends CommandGroup{
 
 	public Autonomous(){
 		
-		addParallel(new MoveArmCommand("All Down"));
-		addSequential(new MoveAutonomousCommand(1000, "Straight"));
-		
+		//Move forward while picking up first tote
+		addSequential(new MoveArmCommand("All Down"));
+		addParallel(new MoveAutonomousCommand(30, "Forward"));
 		addSequential(new IntakeAutonomousCommand("In"));
 		addSequential(new MoveArmCommand("Up"));
-		addParallel(new IntakeAutonomousCommand("Out"));
-		addSequential(new MoveAutonomousCommand(1000, "Straight"));
 		
-		addParallel(new IntakeAutonomousCommand("In"));
+		//Move forward while pushing bin
+		addParallel(new IntakeAutonomousCommand("Out"));
+		addSequential(new MoveAutonomousCommand(54, "Forward"));
+		
+		//Move forward while taking in second tote
+		addParallel(new MoveAutonomousCommand(27, "Forward"));
+		addSequential(new IntakeAutonomousCommand("In"));
+		
+		//bring down arm and pick up tote
 		addSequential(new MoveArmCommand("All Down"));
 		addSequential(new MoveArmCommand("Up"));
-		addParallel(new IntakeAutonomousCommand("Out"));
-		addSequential(new MoveAutonomousCommand(1000, "Straight"));
 		
-		addParallel(new IntakeAutonomousCommand("In"));
+		//Move forward while pushing bin
+		addParallel(new IntakeAutonomousCommand("Out"));
+		addSequential(new MoveAutonomousCommand(54, "Forward"));
+		
+		//MoveForward while taking in third tote
 		addSequential(new MoveArmCommand("All Down"));
-		addSequential(new MoveAutonomousCommand(500, "Right"));
+		addParallel(new IntakeAutonomousCommand("In"));
+		addSequential(new MoveAutonomousCommand(27, "Foward"));
 		
-		addSequential(new MoveAutonomousCommand(750, "Straight"));
+		//Turn right and move Forward
+		addSequential(new MoveAutonomousCommand(1000, "Right"));
+		addSequential(new MoveAutonomousCommand(100, "Forward"));
+
+		//Move back and eject totes
 		addParallel(new IntakeAutonomousCommand("Out"));
-		addSequential(new MoveAutonomousCommand(1000, "Back"));
+		addSequential(new MoveAutonomousCommand(30, "Back"));
 	}
 
 }
