@@ -14,14 +14,13 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class ForkliftSubsystem extends Subsystem {
 	private Talon winchMotor;
-	private Encoder winchEncoder;
 	private DigitalInput upperLimit;
 	private DigitalInput lowerLimit;
 	//set isUpperLimit and isLowerLimit based on the limit switch
 	
 	public ForkliftSubsystem(){
 		winchMotor = new Talon(RobotMap.winchMotor) ;
-		winchEncoder = new Encoder(RobotMap.winchEncoderChannelA, RobotMap.winchEncoderChannelB);
+		new Encoder(RobotMap.winchEncoderChannelA, RobotMap.winchEncoderChannelB);
 		upperLimit = new DigitalInput(RobotMap.upperLimitSwitchPort);
 		lowerLimit = new DigitalInput(RobotMap.lowerLimitSwitchPort);
 	}

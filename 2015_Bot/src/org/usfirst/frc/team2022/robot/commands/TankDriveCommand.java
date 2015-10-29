@@ -39,10 +39,6 @@ public class TankDriveCommand extends Command {
 		double right = Math.max(Math.min(oi.xbox.GetRightY(), 1), -1);
 		double left = Math.max(Math.min(oi.xbox.GetLeftY(), 1), -1);
 		
-		if(oi.attack3.getButton(3) || oi.attack4.getButton(3)){
-    		pneumaticSubsystem.toggleClawState();
-    	}
-		
 		if (oi.xbox.GetRightBumperValue()) {
 			tankSubsystem.toggleInversion();
 		}

@@ -38,5 +38,6 @@ public class RobotMap {
 	//Encoder
 	public static int encoder1 = 0;
 	public static int encoder2 = 1;
+	public static int clawPressureSwitchChannel;
 }
 

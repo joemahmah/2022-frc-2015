@@ -32,9 +32,9 @@ public class CompressorCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    	
-    	
+    	if(oi.attack3.getButton(3) || oi.attack4.getButton(3)){
+    		pneumaticSubsystem.toggleClawState();
+    	}
     }
 
     //Make this return true when this Command no longer needs to run execute()

@@ -26,10 +26,10 @@ public class IntakeCommand extends Command{
 	protected void execute() {
 		
 		//Take in totes
-		if(oi.attack3.getButton(6) || oi.attack4.getButton(6)){
+		if(oi.attack3.getButton(2) || oi.attack4.getButton(2)){
 			intakeSubsystem.totesIn();
 		//Spit out totes
-		}else if(oi.attack3.getButton(7) || oi.attack4.getButton(7)){
+		}else if(oi.attack3.getButton(2) || oi.attack4.getButton(3)){
 			intakeSubsystem.totesOut();
 		}else{
 			intakeSubsystem.stop();

@@ -34,11 +34,11 @@ public class ForkliftCommand extends Command {
     	
 		double moveMag = Math.max(Math.min(oi.attack4.getYAxis(), 1), -1);
 		
-		if(oi.attack3.getButton(1)){
-			speedMod = .75 - Math.abs(oi.attack3.getXAxis() * oi.attack3.getYAxis() * 3 / 4);
-		} else if(oi.attack3.getButton(5)){
-			speedMod = .75 + Math.abs(oi.attack3.getXAxis() * oi.attack3.getYAxis() / 4);
-		}
+//		if(oi.attack3.getButton(1)){
+//			speedMod = .75 - Math.abs(oi.attack3.getXAxis() * oi.attack3.getYAxis() * 3 / 4);
+//		} else if(oi.attack3.getButton(5)){
+//			speedMod = .75 + Math.abs(oi.attack3.getXAxis() * oi.attack3.getYAxis() / 4);
+//		}
 		
 		if(oi.attack4.getButton(1)){
 			speedMod = .25;

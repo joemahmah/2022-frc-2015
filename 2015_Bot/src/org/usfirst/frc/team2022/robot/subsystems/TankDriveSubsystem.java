@@ -1,6 +1,5 @@
 package org.usfirst.frc.team2022.robot.subsystems;
 
-import java.lang.invoke.ConstantCallSite;
 
 import org.usfirst.frc.team2022.robot.RobotMap;
 import org.usfirst.frc.team2022.robot.commands.TankDriveCommand;
@@ -13,28 +12,28 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class TankDriveSubsystem extends Subsystem {
-	private Talon frontLeft, frontRight, rearLeft, rearRight;
+	private final Talon frontLeft, frontRight, rearLeft, rearRight;
 	private double leftSpeed, rightSpeed;
 	private boolean inverted;
 	private long lastTime;
 	private Encoder encoder;
 
-	public TankDriveSubsystem() {
+	public TankDriveSubsystem(){
 		// SmartDashboard.putString("TankDrive", "SUBSYSTEM_INIT"); //Will
 		// crash. TODO: fix?
-		frontLeft = new Talon(RobotMap.leftMotorFront);
-		frontRight = new Talon(RobotMap.rightMotorFront);
-		rearLeft = new Talon(RobotMap.leftMotorBack);
-		rearRight = new Talon(RobotMap.rightMotorBack);
+            frontLeft = new Talon(RobotMap.leftMotorFront);
+            frontRight = new Talon(RobotMap.rightMotorFront);
+            rearLeft = new Talon(RobotMap.leftMotorBack);
+            rearRight = new Talon(RobotMap.rightMotorBack);
 
-		inverted = false;
-		lastTime = System.currentTimeMillis();
+            inverted = false;
+            lastTime = System.currentTimeMillis();
 		
-		encoder = new Encoder(RobotMap.encoder1, RobotMap.encoder2, false);
-		encoder.setDistancePerPulse(4.7);
-		encoder.setDistancePerPulse((6 * Math.PI) / 360); //No idea if this is right, diameter * pi / pulses per revolution. Change to correct measurements
-		
-		encoder.reset();
+//		encoder = new Encoder(RobotMap.encoder1, RobotMap.encoder2, false);
+//		encoder.setDistancePerPulse(4.7);
+//		encoder.setDistancePerPulse((6 * Math.PI) / 360); //No idea if this is right, diameter * pi / pulses per revolution. Change to correct measurements
+//		
+//		encoder.reset();
 		
 	}
 	
