@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.Solenoid;
  *
  * @author Michael Dow
  * @author Ben Maher
- * @author Sean Ngo
  *
  */
 
